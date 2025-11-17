@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Array de perguntas atualizado com as 15 novas perguntas
+    // Array de perguntas (o mesmo que você enviou)
     const questions = [
         { question: "Em 2 Tessalonicenses 1, Paulo elogia a igreja principalmente por:", answers: [{ text: "Sua riqueza crescente", correct: false }, { text: "Sua fé e amor que continuam aumentando", correct: true }, { text: "Sua capacidade de realizar milagres", correct: false }, { text: "Sua obediência às tradições judaicas", correct: false }] },
         { question: "Em 2 Tessalonicenses 2, Paulo afirma que a volta de Cristo só ocorrerá depois de qual evento?", answers: [{ text: "A construção do terceiro templo", correct: false }, { text: "A grande fome sobre Israel", correct: false }, { text: "A apostasia e a manifestação do homem da iniquidade", correct: true }, { text: "A conversão das nações", correct: false }] },
@@ -18,9 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
         { question: "Em 2 Timóteo 4, Paulo declara ter combatido o bom combate e ter:", answers: [{ text: "Convertido todas as nações", correct: false }, { text: "Cumprido todas as profecias", correct: false }, { text: "Guardado a fé e terminado a carreira", correct: true }, { text: "Realizado todos os milagres prometidos", correct: false }] }
     ];
 
-    const database = firebase.database();
+    // --- MUDANÇA IMPORTANTE ---
+    // Declara a variável 'database' aqui, mas não a inicializa ainda.
+    let database;
 
-    // ... (O resto do código permanece igual ao anterior) ...
+    // Tenta inicializar o database. Se falhar (ex: chaves não configuradas),
+    // o 'catch' evita que o script quebre.
+    try {
+        database = firebase.database();
+    } catch (e) {
+        console.error("Firebase não pôde ser inicializado. Verifique a configuração no index.html:", e);
+    }
+    // --- FIM DA MUDANÇA ---
 
     const loginScreen = document.getElementById('login-screen');
     const quizScreen = document.getElementById('quiz-screen');
@@ -44,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let score = 0;
     let currentPlayer = '';
 
+    // Este código agora vai funcionar, pois o script não quebrou antes
     startButton.addEventListener('click', () => {
         currentPlayer = playerNameInput.value.trim();
         if (currentPlayer) {
@@ -69,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         resetState();
         const currentQuestion = questions[currentQuestionIndex];
         questionCounter.innerText = `Pergunta ${currentQuestionIndex + 1} de ${questions.length}`;
-        // Barra de progresso atualizada para o total de 15 perguntas
         progressBar.style.width = `${((currentQuestionIndex) / questions.length) * 100}%`;
         questionTextElement.innerText = currentQuestion.question;
         currentQuestion.answers.forEach(answer => {
@@ -132,9 +141,17 @@ document.addEventListener('DOMContentLoaded', () => {
         updateAndDisplayRanking();
     }
 
+    // --- MUDANÇA IMPORTANTE ---
+    // A lógica do ranking agora verifica se o 'database' existe antes de usá-lo.
     function updateAndDisplayRanking() {
         loadingRankingText.style.display = 'block';
         rankingList.innerHTML = '';
+
+        // Se o 'database' não foi inicializado com sucesso, exibe um aviso e para.
+        if (!database) {
+            loadingRankingText.innerText = 'Ranking indisponível. (Verifique a configuração do Firebase)';
+            return;
+        }
 
         const playerRef = database.ref('rankings/' + currentPlayer);
 
@@ -168,6 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    // --- FIM DA MUDANÇA ---
 
     // Tenta recuperar o nome do jogador se ele já jogou antes
     const savedPlayerName = localStorage.getItem('gincanaPlayerName');
