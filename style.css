@@ -1,0 +1,271 @@
+:root {
+    --bg-color: #FDF8F0;
+    --text-color: #4A443F;
+    /* Cor primária atualizada para um amarelo-ouro escuro */
+    --primary-color: #DAA520;
+    --light-gray: #E0D8CC;
+    --correct-color: #588157;
+    --incorrect-color: #D9534F;
+    --font-heading: 'Playfair Display', serif;
+    --font-body: 'Montserrat', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    opacity: 0.8;
+    margin-bottom: 2.5rem;
+}
+
+
+/* Esconde as telas que não estão ativas */
+
+.hidden {
+    display: none;
+}
+
+
+/* TELA DE LOGIN */
+
+.login-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+#player-name {
+    font-family: var(--font-body);
+    width: 100%;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--light-gray);
+    margin-bottom: 1rem;
+}
+
+#start-btn {
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+
+/* Cor de hover atualizada */
+
+#start-btn:hover {
+    background-color: #b88d1c;
+}
+
+
+/* TELA DO QUIZ */
+
+#quiz-box {
+    background-color: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+#progress-bar-container {
+    width: 100%;
+    height: 10px;
+    background-color: var(--light-gray);
+    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+#progress-bar {
+    height: 100%;
+    width: 0%;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    transition: width 0.4s ease-in-out;
+}
+
+#question-counter {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #888;
+    margin-bottom: 1rem;
+}
+
+#question-text {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    min-height: 70px;
+}
+
+.btn-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+}
+
+.btn {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 500;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 2px solid var(--light-gray);
+    background-color: white;
+    color: var(--text-color);
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+    border-color: var(--primary-color);
+    background-color: #fff9f2;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
+}
+
+.btn.correct {
+    background-color: var(--correct-color);
+    border-color: var(--correct-color);
+    color: white;
+}
+
+.btn.incorrect {
+    background-color: var(--incorrect-color);
+    border-color: var(--incorrect-color);
+    color: white;
+}
+
+#next-btn {
+    display: none;
+    width: 100%;
+    margin-top: 2rem;
+}
+
+
+/* TELA DE RESULTADOS E RANKING */
+
+.results-box {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+#final-score-text {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+}
+
+.ranking-container {
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.ranking-container h3 {
+    font-family: var(--font-heading);
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+#ranking-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+#ranking-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+#ranking-list li:nth-child(odd) {
+    background-color: #f9f4ec;
+}
+
+#ranking-list li.current-player {
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+}
+
+.rank-score {
+    font-weight: bold;
+}
+
+#restart-btn,
+#next-btn {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    font-weight: bold;
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+
+/* Cor de hover atualizada */
+
+#restart-btn:hover {
+    background-color: #b88d1c;
+}
+
+
+/* Font Awesome Icon */
+
+.fa-trophy {
+    color: #ffc107;
+    /* Cor de troféu */
+    margin-right: 0.5rem;
+}

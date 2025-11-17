@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gênesis Gincana - Epístolas</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <div id="login-screen">
+            <h1>Gênesis Gincana</h1>
+            <p class="subtitle">Edição Especial: 2 Tessalonicenses, 1 Timóteo e 2 Timóteo</p>
+            <div class="login-box">
+                <input type="text" id="player-name" placeholder="Digite seu nome para o ranking" maxlength="15">
+                <button id="start-btn">Começar!</button>
+            </div>
+        </div>
+
+        <div id="quiz-screen" class="hidden">
+            <div id="quiz-box">
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+                <p id="question-counter"></p>
+                <h2 id="question-text">Carregando pergunta...</h2>
+                <div id="answer-buttons" class="btn-container"></div>
+                <button id="next-btn">Próxima</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="hidden">
+            <div class="results-box">
+                <h2 id="final-score-text">Sua Pontuação</h2>
+                <div class="ranking-container">
+                    <h3><i class="fas fa-trophy"></i> Ranking Geral</h3>
+                    <p id="loading-ranking">Carregando ranking...</p>
+                    <ol id="ranking-list"></ol>
+                </div>
+                <button id="restart-btn">Jogar Novamente</button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
+    <script>
+        // COLE AQUI O OBJETO firebaseConfig QUE VOCÊ COPIOU DO SITE DO FIREBASE
+        const firebaseConfig = {
+            apiKey: "SUA_API_KEY",
+            authDomain: "SEU_AUTH_DOMAIN",
+            databaseURL: "SEU_DATABASE_URL",
+            projectId: "SEU_PROJECT_ID",
+            storageBucket: "SEU_STORAGE_BUCKET",
+            messagingSenderId: "SEU_MESSAGING_SENDER_ID",
+            appId: "SEU_APP_ID"
+        };
+        // Inicializa o Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
